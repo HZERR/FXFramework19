@@ -1,9 +1,10 @@
 package ru.hzerr.fx.framework.core.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import ru.hzerr.fx.framework.logging.LogManager;
 
-public abstract class AbstractController {
+public abstract class AbstractController extends UIController {
 
     @FXML
     public void initialize() {
@@ -11,7 +12,7 @@ public abstract class AbstractController {
         try {
             onInit();
             updateLocale();
-            updateUI();
+            applyTheme();
         } catch (Exception e) {
             onInitializationFailure(e);
         }
@@ -19,7 +20,6 @@ public abstract class AbstractController {
 
     protected abstract void onInit() throws Exception;
     protected abstract void updateLocale();
-    protected abstract void updateUI();
 
     protected void onInitializationFailure(Exception e) {
         LogManager.getFXLogger().error("Initialization failure in class-controller " + this.getClass().getSimpleName(), e);

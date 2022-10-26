@@ -1,4 +1,4 @@
-package ru.hzerr.fx.framework.exception;
+package ru.hzerr.fx.framework.exception.unchecked;
 
 public class FactoryCloseableException extends FXUncheckedException {
 

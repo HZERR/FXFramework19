@@ -6,7 +6,7 @@ import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.apache.commons.configuration2.convert.DefaultListDelimiterHandler;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 import ru.hzerr.file.BaseFile;
-import ru.hzerr.fx.framework.exception.UncheckedConfigurationException;
+import ru.hzerr.fx.framework.exception.unchecked.UncheckedConfigurationException;
 
 public class PropertiesConfigurationBuilder implements ConfigurationBuilder<PropertiesConfiguration> {
 

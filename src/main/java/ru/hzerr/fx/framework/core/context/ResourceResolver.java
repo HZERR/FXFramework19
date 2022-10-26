@@ -1,7 +1,8 @@
-package ru.hzerr.fx.framework.core.fxml.resolver;
+package ru.hzerr.fx.framework.core.context;
 
 import com.google.common.base.Preconditions;
 import ru.hzerr.collections.list.HList;
+import ru.hzerr.collections.list.SynchronizedHList;
 import ru.hzerr.fx.framework.core.controller.AbstractController;
 import ru.hzerr.fx.framework.core.controller.Controller;
 import ru.hzerr.fx.framework.core.controller.Route;
@@ -9,26 +10,28 @@ import ru.hzerr.fx.framework.core.fxml.FXML;
 import ru.hzerr.fx.framework.exception.ResolveException;
 
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
 
-public abstract class AbstractFXMLResolver {
+public class ResourceResolver implements IResolver<String, URL> {
 
-    protected final HList<Class<? extends AbstractController>> data;
+    protected static final HList<Class<? extends AbstractController>> controllers = new SynchronizedHList<>();
 
-    protected AbstractFXMLResolver(HList<Class<? extends AbstractController>> data) {
-        this.data = data;
+    @Override
+    public URL resolveResource(String key) {
+        return null;
     }
 
     // TODO: 10/25/22 ADDING @FXController handling
-    public FXML resolve(String name) throws ResolveException {
-        Preconditions.checkNotNull(name, "Name cannot be null");
-        Preconditions.checkState(!name.isBlank(), "Name cannot be blank");
-        for (Class<? extends AbstractController> clazz : data) {
+    public FXML resolveFXML(String key) throws ResolveException {
+        Preconditions.checkNotNull(key, "Name cannot be null");
+        Preconditions.checkState(!key.isBlank(), "Name cannot be blank");
+        for (Class<? extends AbstractController> clazz : controllers) {
             if (clazz.getSuperclass().isAssignableFrom(AbstractController.class)) {
                 if (clazz.isAnnotationPresent(Controller.class)) {
                     final String identityName = clazz.getAnnotation(Controller.class).value();
                     Preconditions.checkState(!identityName.isBlank(),
                             "The name of the class \"%s\" controller cannot be empty", clazz.getName());
-                    if (identityName.equals(name)) {
+                    if (identityName.equals(key)) {
                         if (clazz.isAnnotationPresent(Route.class)) {
                             final String location = clazz.getAnnotation(Route.class).value();
                             Preconditions.checkState(!location.isBlank(),
@@ -49,12 +52,5 @@ public abstract class AbstractFXMLResolver {
         }
 
         throw new ResolveException("No fxml file was found for name " + name);
-    }
-
-    public void add(Class<? extends AbstractController> controllerClass) {
-        data.add(controllerClass);
-    }
-    public void remove(Class<? extends AbstractController> controllerClass) {
-        data.remove(controllerClass);
     }
 }

@@ -3,8 +3,8 @@ package ru.hzerr.fx.framework.logging;
 import ch.qos.logback.classic.Logger;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import ru.hzerr.fx.framework.exception.FactoryCloseableException;
-import ru.hzerr.fx.framework.exception.UncheckedLoggingInitializationException;
+import ru.hzerr.fx.framework.exception.unchecked.FactoryCloseableException;
+import ru.hzerr.fx.framework.exception.unchecked.UncheckedLoggingInitializationException;
 import ru.hzerr.fx.framework.logging.factory.LogFactory;
 import ru.hzerr.fx.framework.logging.factory.FXFrameworkSessionLogFactory;
 
@@ -64,14 +64,14 @@ public class LogManager {
     public static void setLogFactory(LogFactory factory) { USER_FACTORY.setValue(factory); }
 
     /**
-     * @return FXFramework logger
+     * @return регистратор FXFramework
      */
     public static Logger getFXLogger() {
         return FX_FACTORY.getValue().getLogger();
     }
 
     /**
-     * @return Custom logger
+     * @return пользовательский регистратор
      */
     public static Logger getLogger() { return FX_FACTORY.getValue().getLogger(); }
 

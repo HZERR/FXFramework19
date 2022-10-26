@@ -2,7 +2,7 @@ package ru.hzerr.fx.framework.config.basic;
 
 import ru.hzerr.fx.framework.config.ConfigurationBuilder;
 import ru.hzerr.fx.framework.core.context.FxApplicationContext;
-import ru.hzerr.fx.framework.exception.UncheckedConfigurationException;
+import ru.hzerr.fx.framework.exception.unchecked.UncheckedConfigurationException;
 
 public class BasicConfigurationBuilder implements ConfigurationBuilder<BasicConfiguration> {
 

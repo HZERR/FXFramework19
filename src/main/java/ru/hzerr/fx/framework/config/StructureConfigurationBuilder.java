@@ -1,6 +1,6 @@
 package ru.hzerr.fx.framework.config;
 
-import ru.hzerr.fx.framework.exception.StructureCreateImpossibleException;
+import ru.hzerr.fx.framework.exception.unchecked.StructureCreateImpossibleException;
 
 import java.io.IOException;
 

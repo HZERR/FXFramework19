@@ -93,9 +93,9 @@
         <dependency>
             <groupId>ru.hzerr</groupId>
             <artifactId>common-instruments</artifactId>
-            <version>1.0</version>
+            <version>1.1</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/CommonInstruments-JDK19-1.0.jar</systemPath>
+            <systemPath>${project.basedir}/lib/CommonInstruments-JDK19-1.1.jar</systemPath>
             <classifier>custom</classifier>
         </dependency>
     </dependencies>
