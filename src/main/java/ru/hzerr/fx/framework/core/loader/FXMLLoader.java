@@ -5,7 +5,7 @@ import javafx.scene.Parent;
 import ru.hzerr.collections.pair.IUnmodifiablePair;
 import ru.hzerr.collections.pair.UnmodifiablePair;
 import ru.hzerr.fx.framework.core.context.FxApplicationContext;
-import ru.hzerr.fx.framework.core.controller.AbstractController;
+import ru.hzerr.fx.framework.core.controller.Controller;
 import ru.hzerr.fx.framework.core.fxml.FXML;
 import ru.hzerr.fx.framework.exception.ResourceLoadException;
 import ru.hzerr.fx.framework.exception.ResourceNotFoundException;
@@ -107,7 +107,7 @@ public final class FXMLLoader {
      * @see #load(String)
      */
     @CanIgnoreReturnValue
-    public static <CONTROLLER extends AbstractController> IUnmodifiablePair<Parent, CONTROLLER>
+    public static <CONTROLLER extends Controller> IUnmodifiablePair<Parent, CONTROLLER>
     load(Class<CONTROLLER> controllerClass, String id) throws ResourceLoadException {
         return load0(id, Parent.class, controllerClass);
     }
@@ -155,7 +155,7 @@ public final class FXMLLoader {
      * @see #load(String)
      */
     @CanIgnoreReturnValue
-    public static <PARENT extends Parent, CONTROLLER extends AbstractController> IUnmodifiablePair<PARENT, CONTROLLER>
+    public static <PARENT extends Parent, CONTROLLER extends Controller> IUnmodifiablePair<PARENT, CONTROLLER>
     load(String id, Class<PARENT> parentClass, Class<CONTROLLER> controllerClass) throws ResourceLoadException {
         return load0(id, parentClass, controllerClass);
     }

@@ -2,9 +2,8 @@ package ru.hzerr.fx.framework.core.fxml.resolver;
 
 import com.google.common.base.Preconditions;
 import ru.hzerr.collections.list.HList;
-import ru.hzerr.fx.framework.core.controller.AbstractController;
 import ru.hzerr.fx.framework.core.controller.Controller;
-import ru.hzerr.fx.framework.core.controller.Route;
+import ru.hzerr.fx.framework.core.controller.annotation.Route;
 import ru.hzerr.fx.framework.core.fxml.FXML;
 import ru.hzerr.fx.framework.exception.ResolveException;
 
@@ -12,9 +11,9 @@ import java.lang.reflect.InvocationTargetException;
 
 public abstract class AbstractFXMLResolver {
 
-    protected final HList<Class<? extends AbstractController>> data;
+    protected final HList<Class<? extends Controller>> data;
 
-    protected AbstractFXMLResolver(HList<Class<? extends AbstractController>> data) {
+    protected AbstractFXMLResolver(HList<Class<? extends Controller>> data) {
         this.data = data;
     }
 
@@ -22,10 +21,10 @@ public abstract class AbstractFXMLResolver {
     public FXML resolve(String name) throws ResolveException {
         Preconditions.checkNotNull(name, "Name cannot be null");
         Preconditions.checkState(!name.isBlank(), "Name cannot be blank");
-        for (Class<? extends AbstractController> clazz : data) {
-            if (clazz.getSuperclass().isAssignableFrom(AbstractController.class)) {
-                if (clazz.isAnnotationPresent(Controller.class)) {
-                    final String identityName = clazz.getAnnotation(Controller.class).value();
+        for (Class<? extends Controller> clazz : data) {
+            if (clazz.getSuperclass().isAssignableFrom(Controller.class)) {
+                if (clazz.isAnnotationPresent(ru.hzerr.fx.framework.core.controller.annotation.Controller.class)) {
+                    final String identityName = clazz.getAnnotation(ru.hzerr.fx.framework.core.controller.annotation.Controller.class).value();
                     Preconditions.checkState(!identityName.isBlank(),
                             "The name of the class \"%s\" controller cannot be empty", clazz.getName());
                     if (identityName.equals(name)) {
@@ -43,7 +42,7 @@ public abstract class AbstractFXMLResolver {
                             throw new ResolveException("The class " + clazz.getName() + " isn't annotated with " + Route.class.getName());
                     }
                 } else
-                    throw new ResolveException("The class " + clazz.getName() + " isn't annotated with " + Controller.class.getName());
+                    throw new ResolveException("The class " + clazz.getName() + " isn't annotated with " + ru.hzerr.fx.framework.core.controller.annotation.Controller.class.getName());
             } else
                 throw new ResolveException("The class " + clazz.getName() + " isn't extended from AbstractController");
         }
@@ -51,10 +50,10 @@ public abstract class AbstractFXMLResolver {
         throw new ResolveException("No fxml file was found for name " + name);
     }
 
-    public void add(Class<? extends AbstractController> controllerClass) {
+    public void add(Class<? extends Controller> controllerClass) {
         data.add(controllerClass);
     }
-    public void remove(Class<? extends AbstractController> controllerClass) {
+    public void remove(Class<? extends Controller> controllerClass) {
         data.remove(controllerClass);
     }
 }

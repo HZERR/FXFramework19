@@ -5,7 +5,8 @@ import com.google.common.base.Predicates;
 import org.reflections.Reflections;
 import ru.hzerr.collections.list.HList;
 import ru.hzerr.collections.list.SynchronizedHList;
-import ru.hzerr.fx.framework.core.controller.*;
+import ru.hzerr.fx.framework.core.controller.Controller;
+import ru.hzerr.fx.framework.core.controller.annotation.*;
 import ru.hzerr.fx.framework.core.fxml.FXML;
 import ru.hzerr.fx.framework.exception.unchecked.LoadingControllerException;
 import ru.hzerr.fx.framework.exception.unchecked.FetchingException;
@@ -16,12 +17,12 @@ import java.util.Optional;
 
 public class ResourceManager implements IResourceManager {
 
-    private final HList<Class<? extends AbstractController>> controllers = new SynchronizedHList<>();
+    private final HList<Class<? extends Controller>> controllers = new SynchronizedHList<>();
 
     @Override
     public Optional<IManagedStep> fetchByID(String id) {
-        Optional<Class<? extends AbstractController>> controllerClass = controllers.find(clazz -> {
-            if (clazz.isAnnotationPresent(Controller.class)) return clazz.getAnnotation(Controller.class).value().equals(id);
+        Optional<Class<? extends Controller>> controllerClass = controllers.find(clazz -> {
+            if (clazz.isAnnotationPresent(ru.hzerr.fx.framework.core.controller.annotation.Controller.class)) return clazz.getAnnotation(ru.hzerr.fx.framework.core.controller.annotation.Controller.class).value().equals(id);
             if (clazz.isAnnotationPresent(FXController.class)) return clazz.getAnnotation(FXController.class).id().equals(id);
 
             return false;
@@ -32,7 +33,7 @@ public class ResourceManager implements IResourceManager {
 
     @Override
     public void registerFromPackage(String pkg) {
-        new Reflections(pkg).getSubTypesOf(AbstractController.class).forEach(clazz -> {
+        new Reflections(pkg).getSubTypesOf(Controller.class).forEach(clazz -> {
             if (PredicateUtil.isAnnotationPresent(Disabled.class).negate().test(clazz)) {
                 register(clazz);
             }
@@ -40,31 +41,31 @@ public class ResourceManager implements IResourceManager {
     }
 
     @Override
-    public void register(Class<? extends AbstractController> controllerClass) {
-        if (Predicates.subtypeOf(AbstractController.class).negate().test(controllerClass)) {
-            throw new LoadingControllerException("The class " + controllerClass.getName() + " isn't extended from " + AbstractController.class.getName());
+    public void register(Class<? extends Controller> controllerClass) {
+        if (Predicates.subtypeOf(Controller.class).negate().test(controllerClass)) {
+            throw new LoadingControllerException("The class " + controllerClass.getName() + " isn't extended from " + Controller.class.getName());
         }
 
-        if (PredicateUtil.isAnnotationPresent(Disabled.class).apply(controllerClass)) {
+        if (PredicateUtil.isAnnotationPresent(Disabled.class).test(controllerClass)) {
             throw new LoadingControllerException("The " + controllerClass.getName() + " class with the annotation \"" + Disabled.class.getName() + "\" cannot be registered by the FXFramework");
         }
 
         if (PredicateUtil.isAnnotationPresent(FXController.class).negate().test(controllerClass)) {
-            if (PredicateUtil.isAnnotationPresent(Controller.class).apply(controllerClass)) {
-                final String identityName = controllerClass.getAnnotation(Controller.class).value();
+            if (PredicateUtil.isAnnotationPresent(ru.hzerr.fx.framework.core.controller.annotation.Controller.class).test(controllerClass)) {
+                final String identityName = controllerClass.getAnnotation(ru.hzerr.fx.framework.core.controller.annotation.Controller.class).value();
                 Preconditions.checkArgument(!identityName.isBlank(),
                         "The name of the class \"%s\" controller cannot be empty", controllerClass.getName());
             } else
-                throw new LoadingControllerException("The class " + controllerClass.getName() + " isn't annotated with " + Controller.class.getName());
+                throw new LoadingControllerException("The class " + controllerClass.getName() + " isn't annotated with " + ru.hzerr.fx.framework.core.controller.annotation.Controller.class.getName());
 
-            if (PredicateUtil.isAnnotationPresent(Route.class).apply(controllerClass)) {
+            if (PredicateUtil.isAnnotationPresent(Route.class).test(controllerClass)) {
                 final String location = controllerClass.getAnnotation(Route.class).value();
                 Preconditions.checkArgument(!location.isBlank(),
                         "The location of the fxml file of the \"%s\" class controller cannot be empty", controllerClass.getName());
             } else
                 throw new LoadingControllerException("The class " + controllerClass.getName() + " isn't annotated with " + Route.class.getName());
 
-            if (PredicateUtil.isAnnotationPresent(Theme.class).apply(controllerClass)) {
+            if (PredicateUtil.isAnnotationPresent(Theme.class).test(controllerClass)) {
                 final String prefix = controllerClass.getAnnotation(Theme.class).prefix();
                 final String postfix = controllerClass.getAnnotation(Theme.class).postfix();
                 Preconditions.checkArgument(!prefix.isBlank(),
@@ -92,15 +93,15 @@ public class ResourceManager implements IResourceManager {
     }
 
     @Override
-    public void unregister(Class<? extends AbstractController> controllerClass) {
+    public void unregister(Class<? extends Controller> controllerClass) {
         controllers.remove(controllerClass);
     }
 
     public static class ManagedStep implements IManagedStep {
 
-        private final Class<? extends AbstractController> controllerClass;
+        private final Class<? extends Controller> controllerClass;
 
-        public ManagedStep(Class<? extends AbstractController> controllerClass) {
+        public ManagedStep(Class<? extends Controller> controllerClass) {
             this.controllerClass = controllerClass;
         }
 

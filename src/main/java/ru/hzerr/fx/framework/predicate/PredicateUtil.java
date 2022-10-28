@@ -1,11 +1,9 @@
 package ru.hzerr.fx.framework.predicate;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-
 import javax.annotation.CheckForNull;
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
+import java.util.function.Predicate;
 
 public class PredicateUtil {
 
@@ -16,17 +14,12 @@ public class PredicateUtil {
         return new AnnotationPresentPredicate(annotationClass);
     }
 
-    static class AnnotationPresentPredicate implements Predicate<Class<?>>, Serializable {
+    static class AnnotationPresentPredicate implements java.util.function.Predicate<Class<?>>, Serializable {
 
         private final Class<? extends Annotation> clazz;
 
         public AnnotationPresentPredicate(Class<? extends Annotation> clazz) {
             this.clazz = clazz;
-        }
-
-        @Override
-        public boolean apply(Class<?> input) {
-            return input.isAnnotationPresent(clazz);
         }
 
         @Override
@@ -46,6 +39,11 @@ public class PredicateUtil {
         @Override
         public int hashCode() {
             return clazz.hashCode();
+        }
+
+        @Override
+        public boolean test(Class<?> input) {
+            return input.isAnnotationPresent(clazz);
         }
     }
 }

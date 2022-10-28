@@ -12,7 +12,7 @@ public class TestClass extends FXApplication {
     protected void onInit(AbstractFXSettings settings) {
         settings.setResourceClassLoaderOfBasicConfiguration(ClassLoader.getSystemClassLoader());
         settings.setApplicationName("FXFramework");
-        FxApplicationContext.getFXMLSettings().setBaseControllerPackage("ru.hzerr.fx.framework.core.controller");
+        FxApplicationContext.getResourceManager().registerFromPackage("ru.hzerr.fx.framework.core.controller");
     }
 
     @Override

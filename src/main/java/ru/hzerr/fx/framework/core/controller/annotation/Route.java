@@ -1,4 +1,4 @@
-package ru.hzerr.fx.framework.core.controller;
+package ru.hzerr.fx.framework.core.controller.annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

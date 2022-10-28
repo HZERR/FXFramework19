@@ -1,12 +1,10 @@
 package ru.hzerr.fx.framework.core.context;
 
 import org.reflections.Reflections;
-import ru.hzerr.fx.framework.core.controller.AbstractController;
 import ru.hzerr.fx.framework.core.controller.Controller;
-import ru.hzerr.fx.framework.core.controller.Route;
+import ru.hzerr.fx.framework.core.controller.annotation.Route;
 import ru.hzerr.fx.framework.core.fxml.resolver.AbstractFXMLResolver;
 import ru.hzerr.fx.framework.core.fxml.resolver.FXMLResolver;
-import ru.hzerr.fx.framework.logging.LogManager;
 
 public class FXMLSettings implements Settings {
 
@@ -29,7 +27,7 @@ public class FXMLSettings implements Settings {
     /**
      * Получите <b>ClassLoader</b>, который будет загружать FXML файлы.
      * Если classloader раннее не был установлен, будет возвращен системный classloader.
-     * Все контроллеры должны быть аннотированы аннотациями {@link ru.hzerr.fx.framework.core.controller.Route} и {@link ru.hzerr.fx.framework.core.controller.Controller}
+     * Все контроллеры должны быть аннотированы аннотациями {@link Route} и {@link ru.hzerr.fx.framework.core.controller.annotation.Controller}
      * @return fxmlClassLoader classloader, который будет загружать FXML файлы
      */
     public ClassLoader getFXMLClassLoader() {
@@ -69,10 +67,10 @@ public class FXMLSettings implements Settings {
 
     private void lookupControllers(String controllerPackage) {
         Reflections reflections = new Reflections(controllerPackage);
-        reflections.getTypesAnnotatedWith(Controller.class).forEach(clazz -> {
+        reflections.getTypesAnnotatedWith(ru.hzerr.fx.framework.core.controller.annotation.Controller.class).forEach(clazz -> {
             if (clazz.isAnnotationPresent(Route.class)) {
                 //noinspection unchecked
-                resolver.add((Class<? extends AbstractController>) clazz);
+                resolver.add((Class<? extends Controller>) clazz);
             }
         });
     }
