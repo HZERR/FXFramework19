@@ -11,7 +11,6 @@ public abstract class FXMLType {
     /**
      * Example:
      * /fxml/tab
-     * @return
      */
     public abstract String getPackage();
 

@@ -12,8 +12,7 @@ import org.slf4j.LoggerFactory;
 import ru.hzerr.file.BaseFile;
 import ru.hzerr.file.SizeType;
 import ru.hzerr.file.exception.file.HFileNotFoundException;
-import ru.hzerr.fx.framework.config.ConfigFactory;
-import ru.hzerr.fx.framework.core.context.FxApplicationContext;
+import ru.hzerr.fx.framework.core.FxApplicationContext;
 import ru.hzerr.fx.framework.logging.policy.CancelRollingPolicy;
 
 import java.io.IOException;
@@ -52,7 +51,7 @@ public class FXFrameworkSessionLogFactory extends LogFactory {
             }
 
             if (FxApplicationContext.getLoggingSettings().shouldUseFileLoggingOfFXFramework()) {
-                sessionLogFile = ConfigFactory.getConfigFactory().getStructureConfiguration().getLogDirectory().createSubFile(FxApplicationContext.getLoggingSettings().getFrameworkLogFileName());
+                sessionLogFile = FxApplicationContext.getStructureConfiguration().getLogDirectory().createSubFile(FxApplicationContext.getLoggingSettings().getFrameworkLogFileName());
                 if (sessionLogFile.notExists())
                     throw new HFileNotFoundException("Unable to create a log file of the current session");
 

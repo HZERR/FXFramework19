@@ -138,7 +138,7 @@
                             <addClasspath>true</addClasspath>
                         </manifest>
                         <manifestEntries>
-                            <Main-Class>ru.hzerr.fx.framework.Main</Main-Class>
+                            <Main-Class>ru.hzerr.fx.framework.RunnerTest</Main-Class>
                             <Framework-Version>${version}</Framework-Version>
                             <GitHub>https://github.com/${author}</GitHub>
                             <Creation-Date>${maven.build.timestamp}</Creation-Date>
