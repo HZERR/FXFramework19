@@ -6,7 +6,7 @@ import ru.hzerr.fx.framework.core.controller.BaseController;
 
 import java.util.Optional;
 
-public abstract class AbstractResourceManager implements IRegistration {
+public abstract class AbstractControllerManager implements IRegistration {
 
     protected final HList<Class<? extends BaseController>> controllers = new SynchronizedHList<>();
 

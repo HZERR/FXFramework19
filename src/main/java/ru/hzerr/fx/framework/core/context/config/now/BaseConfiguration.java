@@ -13,7 +13,7 @@ import java.util.Locale;
  * - Возвращаемое значение не может быть null</br>
  * - В ином случае реализующая сторона должна кидать исключение {@link DefaultPropertyNotInitializationException}.
  */
-public abstract class DefaultConfiguration implements Initializable {
+public abstract class BaseConfiguration implements Initializable {
 
     public abstract @NonNull Version getApplicationVersion() throws DefaultPropertyNotInitializationException;
     public abstract @NonNull Locale getApplicationLocale() throws DefaultPropertyNotInitializationException;

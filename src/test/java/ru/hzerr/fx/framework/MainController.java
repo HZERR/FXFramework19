@@ -5,13 +5,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import ru.hzerr.fx.framework.core.controller.BaseController;
 import ru.hzerr.fx.framework.core.controller.ILanguage;
-import ru.hzerr.fx.framework.core.controller.annotation.Controller;
 import ru.hzerr.fx.framework.core.controller.annotation.FXController;
-import ru.hzerr.fx.framework.core.controller.annotation.Route;
 import ru.hzerr.fx.framework.core.controller.theme.AbstractTheme;
 
-@Route("fxml/main.fxml")
-@Controller("main")
 @FXController(id = "main", route = "fxml/main.fxml", themePrefix = "i", themePostfix = "i", localeBasePath = "locale.main-controller")
 public class MainController extends BaseController {
 

@@ -10,8 +10,8 @@ import ru.hzerr.fx.framework.core.context.config.ApplicationConfiguration;
 import ru.hzerr.fx.framework.core.context.config.DefaultConfiguration;
 import ru.hzerr.fx.framework.core.context.config.FXConfiguration;
 import ru.hzerr.fx.framework.core.context.config.StructureConfiguration;
-import ru.hzerr.fx.framework.core.context.resource.AbstractResourceManager;
-import ru.hzerr.fx.framework.core.context.resource.ResourceManager;
+import ru.hzerr.fx.framework.core.context.resource.AbstractControllerManager;
+import ru.hzerr.fx.framework.core.context.resource.FXControllerManager;
 
 public class FxApplicationContext {
 
@@ -24,12 +24,12 @@ public class FxApplicationContext {
     private static MemoryConfiguration structureConfiguration;
     private static FileConfiguration applicationConfiguration;
     private static PropertiesConfiguration fileConfiguration;
-    private static AbstractResourceManager resourceManager;
+    private static AbstractControllerManager resourceManager;
 
     public static LoggingConfiguration getLoggingSettings() {
         return (LoggingConfiguration) loggingSettings;
     }
-    public static AbstractResourceManager getResourceManager() { return resourceManager; }
+    public static AbstractControllerManager getResourceManager() { return resourceManager; }
     public static FXConfiguration getBaseFXConfiguration() {
         return (FXConfiguration) fxConfiguration;
     }
@@ -42,7 +42,7 @@ public class FxApplicationContext {
 
     static void initialize(DefaultConfiguration defaultConfiguration) {
         fxConfiguration = new FXConfiguration();
-        resourceManager = new ResourceManager();
+        resourceManager = new FXControllerManager();
         loggingSettings = new LoggingConfiguration();
         structureConfiguration = new StructureConfigurationInitializer().getConfiguration();
         fileConfiguration = new PropertiesConfigurationInitializer(((StructureConfiguration) structureConfiguration).getConfigFile()).getConfiguration();
