@@ -62,12 +62,22 @@ public class Version {
 
         Version version = (Version) o;
 
-        return new EqualsBuilder().append(major, version.major).append(minor, version.minor).append(patch, version.patch).append(build, version.build).isEquals();
+        return new EqualsBuilder()
+                .append(major, version.major)
+                .append(minor, version.minor)
+                .append(patch, version.patch)
+                .append(build, version.build)
+                .isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(major).append(minor).append(patch).append(build).toHashCode();
+        return new HashCodeBuilder(17, 37)
+                .append(major)
+                .append(minor)
+                .append(patch)
+                .append(build)
+                .toHashCode();
     }
 
     @Override

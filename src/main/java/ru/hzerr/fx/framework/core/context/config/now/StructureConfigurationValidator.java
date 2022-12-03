@@ -2,10 +2,10 @@ package ru.hzerr.fx.framework.core.context.config.now;
 
 import ru.hzerr.fx.framework.exception.unchecked.now.ValidationException;
 
-public class StructureConfigurationValidator implements Validator<StructureConfiguration> {
+public class StructureConfigurationValidator implements Validator<IStructureConfiguration> {
 
     @Override
-    public StructureConfiguration validate(StructureConfiguration instance) throws ValidationException {
+    public IStructureConfiguration validate(IStructureConfiguration instance) throws ValidationException {
         throwsIf(instance.getRootDirectory().notExists(), "rootDirectory does not exist");
         throwsIf(instance.getConfigurationDirectory().notExists(), "configurationDirectory does not exist");
         throwsIf(instance.getAssetsDirectory().notExists(), "assetsDirectory does not exist");

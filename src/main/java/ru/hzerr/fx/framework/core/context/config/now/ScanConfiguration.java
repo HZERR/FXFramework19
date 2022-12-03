@@ -6,7 +6,7 @@ import ru.hzerr.fx.framework.core.context.config.Initializable;
 
 public abstract class ScanConfiguration implements Initializable {
 
-    public abstract @NonNull String rootPackage();
+    public abstract @NonNull String[] rootPackages();
     public abstract @NonNull String fxmlPackage();
     public abstract @Nullable String themePackage();
     public abstract @Nullable String internationalizationPackage();

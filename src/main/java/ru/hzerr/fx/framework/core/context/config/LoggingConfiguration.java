@@ -2,7 +2,6 @@ package ru.hzerr.fx.framework.core.context.config;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.PatternLayout;
-import ru.hzerr.fx.framework.core.context.config.MemoryConfiguration;
 import ru.hzerr.fx.framework.logging.encoder.ColoredPatternLayoutEncoder;
 
 import java.nio.charset.Charset;

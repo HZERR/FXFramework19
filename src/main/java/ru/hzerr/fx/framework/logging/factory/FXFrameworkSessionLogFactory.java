@@ -9,6 +9,7 @@ import ch.qos.logback.core.ConsoleAppender;
 import ch.qos.logback.core.encoder.LayoutWrappingEncoder;
 import ch.qos.logback.core.rolling.RollingFileAppender;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
 import ru.hzerr.file.BaseFile;
 import ru.hzerr.file.SizeType;
 import ru.hzerr.file.exception.file.HFileNotFoundException;
@@ -29,6 +30,7 @@ public class FXFrameworkSessionLogFactory extends LogFactory {
     private final RollingFileAppender<ILoggingEvent> fileAppender = new RollingFileAppender<>();
 
     public FXFrameworkSessionLogFactory() {
+
     }
 
     public void createSession() throws IOException {
@@ -51,7 +53,8 @@ public class FXFrameworkSessionLogFactory extends LogFactory {
             }
 
             if (FxApplicationContext.getLoggingSettings().shouldUseFileLoggingOfFXFramework()) {
-                sessionLogFile = FxApplicationContext.getStructureConfiguration().getLogDirectory().createSubFile(FxApplicationContext.getLoggingSettings().getFrameworkLogFileName());
+//                sessionLogFile = FxApplicationContext.getStructureConfiguration().getLogDirectory().createSubFile(FxApplicationContext.getLoggingSettings().getFrameworkLogFileName());
+                // TODO: 28.11.2022 !!!! СВЕРХУ ПОМЕНЯТЬ
                 if (sessionLogFile.notExists())
                     throw new HFileNotFoundException("Unable to create a log file of the current session");
 

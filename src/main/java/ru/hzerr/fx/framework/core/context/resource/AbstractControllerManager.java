@@ -1,5 +1,6 @@
 package ru.hzerr.fx.framework.core.context.resource;
 
+import org.springframework.context.ApplicationContext;
 import ru.hzerr.collections.list.HList;
 import ru.hzerr.collections.list.SynchronizedHList;
 import ru.hzerr.fx.framework.core.controller.BaseController;
@@ -8,17 +9,7 @@ import java.util.Optional;
 
 public abstract class AbstractControllerManager implements IRegistration {
 
-    protected final HList<Class<? extends BaseController>> controllers = new SynchronizedHList<>();
-
-    protected ClassLoader resourceClassLoader = ClassLoader.getSystemClassLoader();
-
-    public final ClassLoader getResourceClassLoader() {
-        return resourceClassLoader;
-    }
-
-    public final void setResourceClassLoader(ClassLoader resourceClassLoader) {
-        this.resourceClassLoader = resourceClassLoader;
-    }
+    protected ApplicationContext context;
 
     public abstract Optional<IManagedStep> fetchByID(String id);
 }

@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Данный класс предоставляет инциализатор конфигурации приложения по-умолчанию с помощью встроенного в jar-файл properties-файла
+ * Данный класс предоставляет инициализатор конфигурации приложения по-умолчанию с помощью встроенного в jar-файл properties-файла
  */
 public class InternalFileBasicConfigurationInitializer implements ConfigurationInitializer<InternalFileBasicConfiguration>  {
     private final String path;

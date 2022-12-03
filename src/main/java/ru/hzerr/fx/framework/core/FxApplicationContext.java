@@ -4,14 +4,10 @@ import org.apache.commons.configuration2.PropertiesConfiguration;
 import ru.hzerr.fx.framework.core.context.config.LoggingConfiguration;
 import ru.hzerr.fx.framework.core.context.config.FileConfiguration;
 import ru.hzerr.fx.framework.core.context.config.MemoryConfiguration;
-import ru.hzerr.fx.framework.core.context.config.initializer.PropertiesConfigurationInitializer;
-import ru.hzerr.fx.framework.core.context.config.initializer.StructureConfigurationInitializer;
 import ru.hzerr.fx.framework.core.context.config.ApplicationConfiguration;
 import ru.hzerr.fx.framework.core.context.config.DefaultConfiguration;
 import ru.hzerr.fx.framework.core.context.config.FXConfiguration;
-import ru.hzerr.fx.framework.core.context.config.StructureConfiguration;
 import ru.hzerr.fx.framework.core.context.resource.AbstractControllerManager;
-import ru.hzerr.fx.framework.core.context.resource.FXControllerManager;
 
 public class FxApplicationContext {
 
@@ -33,19 +29,16 @@ public class FxApplicationContext {
     public static FXConfiguration getBaseFXConfiguration() {
         return (FXConfiguration) fxConfiguration;
     }
-    public static StructureConfiguration getStructureConfiguration() {
-        return (StructureConfiguration) structureConfiguration;
-    }
     public static ApplicationConfiguration getApplicationConfiguration() {
         return (ApplicationConfiguration) applicationConfiguration;
     }
 
     static void initialize(DefaultConfiguration defaultConfiguration) {
-        fxConfiguration = new FXConfiguration();
-        resourceManager = new FXControllerManager();
-        loggingSettings = new LoggingConfiguration();
-        structureConfiguration = new StructureConfigurationInitializer().getConfiguration();
-        fileConfiguration = new PropertiesConfigurationInitializer(((StructureConfiguration) structureConfiguration).getConfigFile()).getConfiguration();
-        applicationConfiguration = new ApplicationConfiguration(fileConfiguration, defaultConfiguration);
+//        fxConfiguration = new FXConfiguration();
+//        resourceManager = new FXControllerManager();
+//        loggingSettings = new LoggingConfiguration();
+//        structureConfiguration = new StructureConfigurationInitializer().getConfiguration();
+//        fileConfiguration = new PropertiesConfigurationInitializer(((Structure) structureConfiguration).getConfigFile()).getConfiguration();
+//        applicationConfiguration = new ApplicationConfiguration(fileConfiguration, defaultConfiguration);
     }
 }

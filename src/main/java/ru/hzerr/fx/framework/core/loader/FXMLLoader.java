@@ -170,7 +170,7 @@ public final class FXMLLoader {
                 .fetchFXML();
 
         LogManager.getFXLogger().debug("Finding the {} file", fxml.location());
-        URL url = FxApplicationContext.getResourceManager().getResourceClassLoader().getResource(fxml.location());
+        URL url = FxApplicationContext.getResourceManager().getClass().getResource(fxml.location()); // TODO: 28.11.2022 SET CLASS LOADERS
 
         javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader();
 
