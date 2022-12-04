@@ -5,8 +5,9 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.junit.jupiter.api.Test;
 import ru.hzerr.fx.framework.core.FXApplication;
-import ru.hzerr.fx.framework.core.context.config.FXConfiguration;
-import ru.hzerr.fx.framework.core.context.config.now.ScanConfiguration;
+import ru.hzerr.fx.framework.core.a.configuration.IStructureConfiguration;
+import ru.hzerr.fx.framework.core.a.configuration.FXConfiguration;
+import ru.hzerr.fx.framework.core.a.configuration.IScanConfiguration;
 
 public class FXApplicationTest extends FXApplication {
 
@@ -16,8 +17,8 @@ public class FXApplicationTest extends FXApplication {
     }
 
     @Override
-    protected ScanConfiguration scanConfiguration() throws Exception {
-        return new ScanConfiguration() {
+    protected IScanConfiguration configuration() throws Exception {
+        return new IScanConfiguration() {
             @Override
             public @NonNull String[] rootPackages() {
                 return new String[] {"ru.hzerr.fx.framework"};
@@ -47,8 +48,8 @@ public class FXApplicationTest extends FXApplication {
 
     @Override
     protected void onInit(FXConfiguration configuration) throws Exception {
-        ((StructureConfiguration) context.getBean(ru.hzerr.fx.framework.core.context.config.now.IStructureConfiguration.class)).setFlag(true);
-        System.out.println(((StructureConfiguration) context.getBean(ru.hzerr.fx.framework.core.context.config.now.IStructureConfiguration.class)).isFlag());
+        ((StructureConfiguration) context.getBean(IStructureConfiguration.class)).setFlag(true);
+        System.out.println(((StructureConfiguration) context.getBean(IStructureConfiguration.class)).isFlag());
     }
 
     @Override

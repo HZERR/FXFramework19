@@ -1,10 +1,10 @@
 package ru.hzerr.fx.framework;
 
 import ru.hzerr.fx.framework.core.annotation.Initializer;
-import ru.hzerr.fx.framework.core.context.config.initializer.ConfigurationInitializer;
-import ru.hzerr.fx.framework.core.context.config.now.IStructureConfiguration;
+import ru.hzerr.fx.framework.core.a.initializer.ConfigurationInitializer;
+import ru.hzerr.fx.framework.core.a.configuration.IStructureConfiguration;
 
-@Initializer(value = StructureConfiguration.class)
+@Initializer(StructureConfiguration.class)
 public class StructureConfigurationInitializer implements ConfigurationInitializer<IStructureConfiguration> {
 
     @Override

@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import ru.hzerr.collections.list.HList;
 import ru.hzerr.collections.list.SynchronizedHList;
 import ru.hzerr.fx.framework.core.controller.theme.AbstractTheme;
-import ru.hzerr.fx.framework.logging.LogManager;
 
 public abstract class BaseController {
 

@@ -6,7 +6,7 @@ import ru.hzerr.file.BaseFile;
 import ru.hzerr.file.HDirectory;
 import ru.hzerr.file.HFile;
 import ru.hzerr.fx.framework.core.annotation.Structure;
-import ru.hzerr.fx.framework.core.context.config.now.IStructureConfiguration;
+import ru.hzerr.fx.framework.core.a.configuration.IStructureConfiguration;
 
 @Structure
 public class StructureConfiguration implements IStructureConfiguration {

@@ -4,13 +4,11 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import javafx.scene.Parent;
 import ru.hzerr.collections.pair.IUnmodifiablePair;
 import ru.hzerr.collections.pair.UnmodifiablePair;
-import ru.hzerr.fx.framework.core.FxApplicationContext;
 import ru.hzerr.fx.framework.core.controller.BaseController;
 import ru.hzerr.fx.framework.core.fxml.FXML;
 import ru.hzerr.fx.framework.exception.ResourceLoadException;
 import ru.hzerr.fx.framework.exception.ResourceNotFoundException;
 import ru.hzerr.fx.framework.exception.unchecked.FXControllerNotFoundException;
-import ru.hzerr.fx.framework.logging.LogManager;
 
 import java.io.IOException;
 import java.net.URL;
